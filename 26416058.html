@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta name="viewport" content="width=device-with,initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="jm/jquery.mobile-1.4.5.css">
+	<script src="jm/jquery.js" type="text/javascript"></script>
+	<script src="jm/jquery.mobile-1.4.5.js" type="text/javascript"></script>
+	<script type="text/javascript">
+			$(document).ready(function(){
+				$('.menupage').on('change', function(){
+					var url = $(this).val();
+					window.location = url;
+				});
+			});
+			$(function(){
+        $( "#popup-outside-page" ).enhanceWithin().popup();
+		});
+	</script>
+	<script type="text/javascript">
+		function factorial()
+		{
+			var angka = document.getElementById("angkafactorial").value;
+			var cekerror = angka.toString();
+			if(cekerror == "")
+			{
+				alert("Tidak boleh kosong!");
+				return false;
+			}
+			var regex=/^[0-9]+$/;
+			if(!angka.match(regex))
+			{
+				alert("Harus angka!");
+				return false;
+			}
+			var hasil = angka;
+			for(var i = 1; i < angka; i++)
+			{
+				hasil = i*hasil;
+			}
+			document.getElementById("hasilfactorial").value=hasil;
+			
+
+		}	
+		function hitungpangkat()
+		{
+			var angka = document.getElementById("angka").value;
+			var angkakosong = angka.toString();
+
+			var pangkat = document.getElementById("pangkat").value;
+			var pangkatkosong = pangkat.toString();
+			if(angkakosong == "")
+			{
+				alert("Angka tidak boleh kosong!");
+				return false;
+			}
+			if(pangkatkosong == "")
+			{
+				alert("Pangkat tidak boleh kosong!");
+				return false;
+			}
+			var regex=/^[0-9]+$/;
+			if(!angka.match(regex) || !pangkat.match(regex))
+			{
+				alert("Harus angka!");
+				return false;
+			}
+			var hasil = Math.pow(angka,pangkat);
+			document.getElementById("hasilpangkat").value = hasil;
+		}
+		function changeColor()
+		{
+			var hexa = document.getElementById("hexa").value;
+			if(hexa == "")
+			{
+				alert("Tidak boleh kosong!");
+				return false;
+			}
+			var len = hexa.length;
+
+			if(hexa.charAt(0)!='#')
+			{
+				alert("Pertamanya harus #");
+				return false;
+			}
+			if(len!=7)
+			{
+				alert("Harus 6 kode hexa setelah #!!");
+				return false;
+			}
+			document.getElementById("hasilhexa").style.color = hexa;
+		}
+
+		$( document ).on( "click", ".show-page-loading-msg", function() {
+    	var $this = $( this ),
+        theme = $this.jqmData( "theme" ) || $.mobile.loader.prototype.options.theme,
+        msgText = $this.jqmData( "msgtext" ) || $.mobile.loader.prototype.options.text,
+        textVisible = $this.jqmData( "textvisible" ) || $.mobile.loader.prototype.options.textVisible,
+        textonly = !!$this.jqmData( "textonly" );
+        html = $this.jqmData( "html" ) || "";
+    	$.mobile.loading( "show", {
+            text: msgText,
+            textVisible: textVisible,
+            theme: theme,
+            textonly: textonly,
+            html: html
+    });
+})
+.on( "click", ".hide-page-loading-msg", function() {
+    $.mobile.loading( "hide" );
+});
+
+$( document ).on( "pagecreate", "#demo-page", function() {
+    $( document ).on( "swipeleft swiperight", "#demo-page", function( e ) {
+      
+        if ( $( ".ui-page-active" ).jqmData( "panel" ) !== "open" ) {
+            if ( e.type === "swipeleft" ) {
+                $( "#right-panel" ).panel( "open" );
+            } else if ( e.type === "swiperight" ) {
+                $( "#left-panel" ).panel( "open" );
+            }
+        }
+    });
+});
+	</script>
+	<style type="text/css">
+		@media all and (max-width: 50em) {
+  		.my-breakpoint .ui-block-a,
+  		.my-breakpoint .ui-block-b,
+  		.my-breakpoint .ui-block-c,
+  		.my-breakpoint .ui-block-d,
+  		.my-breakpoint .ui-block-e {
+    		width: 100%;
+    		float:none;
+  }
+}
+
+#demo-page :not(INPUT):not(TEXTAREA) {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+/* Content styling. */
+dl { font-family: "Times New Roman", Times, serif; padding: 1em; }
+dt { font-size: 2em; font-weight: bold; }
+dt span { font-size: .5em; color: #777; margin-left: .5em; }
+dd { font-size: 1.25em; margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px solid #eee; }
+.back-btn { float: right; margin: 0 2em 1em 0; }
+
+	</style>
+	<title>Tes 1 PPM Ricky Herwanto 26416058</title>
+</head>
+<body>
+<div data-role=page id=win1>
+	<div data-role=header>
+		<h1>Window Title</h1>
+	</div>
+	<div data-role=content>
+		<p>Kalkulator untuk menghitung factorial</p>
+		<input type="text" name="angkafactorial" id="angkafactorial" placeholder="Angka yang ingin dicari faktorialnya">
+		<input  type="text" name="hasilfactorial" placeholder="Hasil Factorial" id="hasilfactorial" disabled>
+		<button onclick="factorial()">
+			Cari Factorialnya
+		</button>
+		<p>Kalkulator untuk menghitung pangkat</p>
+		<input type="text" name="angka" id="angka" placeholder="Angka yang ingin dicari pangkatnya">
+		<input type="text" name="pangkat" id="pangkat" placeholder="Pangkatnya">
+		<input type="text" name="hasilpangkat" id="hasilpangkat" placeholder="Hasil Pangkat" style="background-color:black" disabled="true">
+		<button onclick="hitungpangkat()">
+			Cari Pangkatnya
+		</button>
+		<label for='select-chocice-0' id='select'>Pilihan Menu : </label>
+		<select name='select-choice-0' class='menupage'>
+			<option value='#win1' selected> Menu 1</option>
+			<option value='#win2'> Menu 2</option>
+			<option value='#win3'> Menu 3</option>
+			
+		</select>
+	</div>
+	<div data-role=footer data-position=fixed>
+		<h1>Window bottom</h1>
+	</div>
+</div>
+<div data-role=page id=win2>
+	<div data-role=header>
+		<h1>Window Title</h1>
+	</div>
+	<div data-role=content>
+		<p>Input Angka Hexa (dalam format #)</p>
+		<input type="text" name="hexa" id="hexa" placeholder="#11BB54">
+		
+		<h1 name="hasilhexa" id="hasilhexa" style="color:#11BB54"> Hasil Warna Hexa </h1>
+		<button onclick="changeColor()">
+			Ubah Warnanya
+		</button>
+		<label for='select-chocice-0' id='select'>Pilihan Menu : </label>
+		<select name='select-choice-0' class='menupage'>
+			<option value='#win1'> Menu 1</option>
+			<option value='#win2' selected> Menu 2</option>
+			<option value='#win3'> Menu 3</option>
+			
+		</select>
+	</div>
+	<div data-role=footer data-position=fixed>
+		<h1>Window bottom</h1>
+	</div>
+</div>
+<div data-role=page id=win3>
+	<div data-role=header>
+		<h1>Window Title</h1>
+	</div>
+	<div data-role=content>
+		
+		<div class="ui-grid-b my-breakpoint">
+  		<div class="ui-block-a"><a href="#popupBasic" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="pop">Pertemuan Pertama</a></div>
+  		<div data-role="popup" id="popupBasic">
+		<p>Dipertemuan pertama, kita belajar tentang git. Lalu setelah itu kita belajar tentang command-commandnya seperti git init dan lain-lain. Lalu ada tugas untuk menuliskan rangukamannya. Lalu Setelah itu PRnya adalah menggunakan aplikasi seperti git gui dan git bash, membandingkannya.</p>
+		</div>
+  		<div class="ui-block-b"><a href="#transitionExample" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup">Pertemuan Kedua</a><div data-role="popup" id="transitionExample" class="ui-content" data-theme="a">
+<p>Dipertemuan kedua, kita belajar tentang jQuery Mobile. Seperti yang dilakukan dalam tes ini adalah jQuery Mobile. Tugas saat kelas adalah membuat 5 tipe content yang berbeda-beda.</p>
+</div></div>
+  		<div class="ui-block-c"><a href="#popupMenu" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Actions dan pertemuan ketiga</a>
+<div data-role="popup" id="popupMenu" data-theme="b">
+        <ul data-role="listview" data-inset="true" style="min-width:210px;">
+            <li data-role="list-divider">Choose an action</li>
+            <li><a href="#win1">Go To Win 1</a></li>
+            <li><a href="#win2">Go To Win 2</a></li>
+            <li>Dipertemuan ketiga, kita belajar tentang AngularJS. Mirip seperti jQuery Mobile tapi dipisah-pisahkan htmlnya. echonya menggunakan {{}}</li>
+			<li><a href="#demo-page">Check Panel</a></li>
+        </ul>
+</div>
+</div>
+		</div><!-- /grid-b -->
+		<label for='select-chocice-0' id='select'>Pilihan Menu : </label>
+		<select name='select-choice-0' class='menupage'>
+			<option value='#win1'> Menu 1</option>
+			<option value='#win2'> Menu 2</option>
+			<option value='#win3' selected> Menu 3</option>
+			
+		</select>
+	</div>
+
+
+	<div data-role=footer data-position=fixed>
+		<h1>Window bottom</h1>
+	</div>
+</div>
+
+<div data-role="page" id="demo-page" data-url="demo-page">
+    <div data-role="header" data-theme="b">
+        <h1>Swipe left or right</h1>
+        <a href="#left-panel" data-icon="carat-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open left panel</a>
+        <a href="#right-panel" data-icon="carat-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open right panel</a>
+    </div><!-- /header -->
+    <div role="main" class="ui-content">
+        <dl>
+
+            <h3 style="text-align: left">Left Panel adalah Loader</h3>
+
+
+<h3 style="text-align: right">Right Panel adalah Slider</h3>
+           <h3 style="text-align: center;"><p>Table Column Toggle </p>
+<table data-role="table" id="table-custom-2" data-mode="columntoggle" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="b" data-column-btn-text="Columns to display..." data-column-popup-theme="a">
+         <thead>
+           <tr class="ui-bar-d">
+             <th data-priority="2">No</th>
+             <th>Website</th>
+             
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <th>1</th>
+             <td><a href="https://www.facebook.com" data-rel="external">Facebook</a></td>
+             
+           </tr>
+           <tr>
+             <th>2</th>
+             <td><a href="https://www.twitter.com" data-rel="external">Twitter</a></td>
+             
+           </tr>
+           <tr>
+             <th>3</th>
+             <td><a href="https://www.instagram.com" data-rel="external">Instagram</a></td>
+            
+           </tr>
+           <tr>
+             <th>4</th>
+             <td><a href="https://www.google.com" data-rel="external">Google</a></td>
+             
+           </tr>
+           <tr>
+             <th>5</th>
+             <td><a href="https://www.wikipedia.org/" data-rel="external">Wikipedia</a></td>
+            
+           </tr>
+           <tr>
+             <th>6</th>
+             <td><a href="http://lentera.petra.ac.id/login/index.php" data-rel="external">Lentera</a></td>
+            
+           </tr>
+           <tr>
+             <th>7</th>
+             <td><a href="https://sim.petra.ac.id/petragate/index.php" data-rel="external">Sim</a></td>
+            
+           </tr>
+           <tr>
+             <th>8</th>
+             <td><a href="http://sportfolio.petra.ac.id/bakabootsrap/baka/skkk.php" data-rel="external">Cek SKKK</a></td>
+          
+           </tr>
+           <tr>
+             <th>9</th>
+             <td><a href="https://www.detik.com" data-rel="external">dETIK</a></td>
+          
+           </tr>
+           <tr>
+             <th>10</th>
+             <td class="title"><a href="https://www.kompas.com" data-rel="external">Kompas</a></td>
+           
+           </tr>
+         </tbody>
+       </table></h3>
+        </dl>
+        <a href="#demo-intro" data-rel="back" class="back-btn ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-back ui-btn-icon-right">Back to demo intro</a>
+    </div><!-- /content -->
+    <div data-role="panel" id="left-panel" data-theme="b">
+        <p><button class="show-page-loading-msg" data-textonly="false" data-textvisible="false" data-msgtext="" data-inline="true">Icon (default)</button>
+<button class="show-page-loading-msg" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Icon + text</button>
+<button class="show-page-loading-msg" data-textonly="true" data-textvisible="true" data-msgtext="Text only loader" data-inline="true">Text only</button>
+<button class="hide-page-loading-msg" data-inline="true" data-icon="delete">Hide</button></p>
+        <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-right">Close</a>
+    </div><!-- /panel -->
+    <div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="b">
+        <p><form>
+    <label for="slider-2"></label>
+    <input type="range" name="slider-2" id="slider-2" data-highlight="true" min="0" max="100" value="50">
+</form></p>
+        <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-right">Close</a>
+    </div><!-- /panel -->
+</div>
+
+</body>
+</html>
